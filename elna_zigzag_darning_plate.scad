@@ -66,6 +66,32 @@ difference() {
     rotate([0,180,0])
       linear_extrude(height=carve_h, center=true, scale=1.15)
         square([plate_w,plate_d], center=true);
+
+    // put some cubes in 45 degree angle to
+    // cut corners
+    // this works as long as angle == 45
+    chamfer=1;
+    angle=45;
+    h1=h*2;
+    d1=d*2;
+    w1=w*2;
+
+    f=(h1-chamfer);
+
+    translate([-(w/2+f),0,0])
+      rotate([0,-angle,0])
+        cube([w1,d1,h1], center=true);
+
+    translate([(w/2+f),0,0])
+      rotate([0,angle,0])
+        cube([w1,d1,h1], center=true);
+
+    translate([0,-(d/2+f),0])
+      rotate([angle,0,0])
+        cube([w1,d1,h1], center=true);
+
+    translate([0,(d/2+f),0])
+      rotate([-angle,0,0])
+        cube([w1,d1,h1], center=true);
+
 };
-
-

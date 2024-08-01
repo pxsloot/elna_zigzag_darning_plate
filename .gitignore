@@ -1,0 +1,8 @@
+*.retry
+roles
+.*.sw?
+.mise.toml
+.venv
+
+*.stl
+*.png

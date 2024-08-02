@@ -30,26 +30,27 @@ plate_d=25;
 // stub length 
 // they register in the needle plate of the machine. Not too short,
 // not too long
-stub_h=2.0;
+stub=2.0;
 
 thickness=1;
 
 w=plate_w+thickness*2;
 d=plate_d+thickness*2;
 
-difference() {
-  // form the outside, then carve out what's not needed
+// make the part (and place it upside down for printing)
+translate([0,0,h/2]) rotate([0,180,0]) difference() {
+  // form the outside first, remove what's not needed later
   union() {
     cube([w,d,h],center=true);
 
     // these form the features that register in the
-    // notches on the machine
-    translate([0,-(plate_d/2-4),-stub_h/2])
-      cube([w,2,stub_h+h], center=true);
-    translate([0, (plate_d/2-2),-stub_h/2])
-      cube([w,2,stub_h+h], center=true);
+    // notches in the needleplate on the machine
+    translate([0,-(plate_d/2-4),-stub/2])
+      cube([w,2,stub+h], center=true);
+    translate([0, (plate_d/2-2),-stub/2])
+      cube([w,2,stub+h], center=true);
   }
-  
+
   // slot for the needle. Elongated to make zigzag possible
   translate([0,(plate_d/2-11.5),0])
     hull() {
@@ -61,7 +62,7 @@ difference() {
 
   // hollow out the underside. A bit slanted to make it somewhat
   // sturdier. I hope
-  carve_h=h*2+stub_h;
+  carve_h=h*2+stub;
   translate([0,0,-(carve_h-thickness)/2])
     rotate([0,180,0])
       linear_extrude(height=carve_h, center=true, scale=1.15)

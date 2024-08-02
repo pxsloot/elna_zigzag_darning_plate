@@ -10,4 +10,6 @@ These things are unobtainium, or via etsy for around $95
 This is a 3d printed replacement, prints in 10 minutes and costs
 a few cents. Knock off the corners with a file or sandpaper
 
+The part is scripted in OpenSCAD
+
 ![darning plate preview](./elna_zigzag_darning_plate.png)

@@ -67,16 +67,17 @@ difference() {
       linear_extrude(height=carve_h, center=true, scale=1.15)
         square([plate_w,plate_d], center=true);
 
-    // put some cubes in 45 degree angle to
-    // cut corners
-    // this works as long as angle == 45
-    chamfer=1;
-    angle=45;
-    h1=h*2;
-    d1=d*2;
-    w1=w*2;
+    // Make some chamfers, because we're not animals
+    chamfer=1.0;
+    angle=30;
 
-    f=(h1-chamfer);
+    oversize=2;
+    h1=h*oversize;
+    d1=d*oversize;
+    w1=w*oversize;
+
+    // calculate offset
+    f=((h1/oversize)/sin(angle))+((h/2-chamfer)/tan(angle));
 
     translate([-(w/2+f),0,0])
       rotate([0,-angle,0])
